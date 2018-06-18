@@ -1,0 +1,852 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestoranModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ImePrezime" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jelo">
+          <Key>
+            <PropertyRef Name="ProizvodId" />
+          </Key>
+          <Property Name="ProizvodId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JeloNamirnica">
+          <Key>
+            <PropertyRef Name="JeloId" />
+            <PropertyRef Name="NamirnicaId" />
+          </Key>
+          <Property Name="JeloId" Type="int" Nullable="false" />
+          <Property Name="NamirnicaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Namirnica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Lager" Type="int" />
+        </EntityType>
+        <EntityType Name="Pice">
+          <Key>
+            <PropertyRef Name="ProizvodId" />
+          </Key>
+          <Property Name="ProizvodId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Porudzbenica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DobavljacId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Lager" Type="int" Nullable="false" />
+          <Property Name="Cena" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="SifraRacuna" />
+          </Key>
+          <Property Name="SifraRacuna" Type="int" Nullable="false" />
+          <Property Name="BrojStola" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+            <PropertyRef Name="GostId" />
+            <PropertyRef Name="DatumVreme" />
+          </Key>
+          <Property Name="BrojStola" Type="int" Nullable="false" />
+          <Property Name="GostId" Type="int" Nullable="false" />
+          <Property Name="DatumVreme" Type="datetime" Nullable="false" />
+          <Property Name="BrojRezervacije" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sektor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StavkaPorudzbenice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProizvodId" Type="int" Nullable="false" />
+          <Property Name="PorudzbenicaId" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StavkaRacuna">
+          <Key>
+            <PropertyRef Name="StavkaId" />
+          </Key>
+          <Property Name="SifraRacuna" Type="int" Nullable="false" />
+          <Property Name="ProizvodId" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+          <Property Name="StavkaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sto">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+          </Key>
+          <Property Name="BrojStola" Type="int" Nullable="false" />
+          <Property Name="SektorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Jelo__ProizvodId__45F365D3">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="Jelo" Type="Self.Jelo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jelo">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JeloNamir__JeloI__48CFD27E">
+          <End Role="Jelo" Type="Self.Jelo" Multiplicity="1" />
+          <End Role="JeloNamirnica" Type="Self.JeloNamirnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jelo">
+              <PropertyRef Name="ProizvodId" />
+            </Principal>
+            <Dependent Role="JeloNamirnica">
+              <PropertyRef Name="JeloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JeloNamir__Namir__49C3F6B7">
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="1" />
+          <End Role="JeloNamirnica" Type="Self.JeloNamirnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Namirnica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JeloNamirnica">
+              <PropertyRef Name="NamirnicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pice__ProizvodId__4316F928">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="Pice" Type="Self.Pice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pice">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Porudzben__Dobav__74AE54BC">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Porudzbenica">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Racun__BrojStola__5AEE82B9">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__BrojS__3D5E1FD2">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__GostI__3E52440B">
+          <End Role="Gost" Type="Self.Gost" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="GostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Porud__787EE5A0">
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Porudzbenica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="PorudzbenicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Proiz__778AC167">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Proiz__4F7CD00D">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Sifra__4E88ABD4">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="SifraRacuna" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="SifraRacuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sto__SektorId__6FE99F9F">
+          <End Role="Sektor" Type="Self.Sektor" Multiplicity="1" />
+          <End Role="Sto" Type="Self.Sto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sektor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sto">
+              <PropertyRef Name="SektorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestoranModelStoreContainer">
+          <EntitySet Name="Dobavljac" EntityType="Self.Dobavljac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gost" EntityType="Self.Gost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jelo" EntityType="Self.Jelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JeloNamirnica" EntityType="Self.JeloNamirnica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Namirnica" EntityType="Self.Namirnica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pice" EntityType="Self.Pice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Porudzbenica" EntityType="Self.Porudzbenica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvod" EntityType="Self.Proizvod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Racun" EntityType="Self.Racun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervacija" EntityType="Self.Rezervacija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sektor" EntityType="Self.Sektor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkaPorudzbenice" EntityType="Self.StavkaPorudzbenice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkaRacuna" EntityType="Self.StavkaRacuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sto" EntityType="Self.Sto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Jelo__ProizvodId__45F365D3" Association="Self.FK__Jelo__ProizvodId__45F365D3">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="Jelo" EntitySet="Jelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JeloNamir__JeloI__48CFD27E" Association="Self.FK__JeloNamir__JeloI__48CFD27E">
+            <End Role="Jelo" EntitySet="Jelo" />
+            <End Role="JeloNamirnica" EntitySet="JeloNamirnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JeloNamir__Namir__49C3F6B7" Association="Self.FK__JeloNamir__Namir__49C3F6B7">
+            <End Role="Namirnica" EntitySet="Namirnica" />
+            <End Role="JeloNamirnica" EntitySet="JeloNamirnica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pice__ProizvodId__4316F928" Association="Self.FK__Pice__ProizvodId__4316F928">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="Pice" EntitySet="Pice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Porudzben__Dobav__74AE54BC" Association="Self.FK__Porudzben__Dobav__74AE54BC">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="Porudzbenica" EntitySet="Porudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Racun__BrojStola__5AEE82B9" Association="Self.FK__Racun__BrojStola__5AEE82B9">
+            <End Role="Sto" EntitySet="Sto" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__BrojS__3D5E1FD2" Association="Self.FK__Rezervaci__BrojS__3D5E1FD2">
+            <End Role="Sto" EntitySet="Sto" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__GostI__3E52440B" Association="Self.FK__Rezervaci__GostI__3E52440B">
+            <End Role="Gost" EntitySet="Gost" />
+            <End Role="Rezervacija" EntitySet="Rezervacija" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Porud__787EE5A0" Association="Self.FK__StavkaPor__Porud__787EE5A0">
+            <End Role="Porudzbenica" EntitySet="Porudzbenica" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Proiz__778AC167" Association="Self.FK__StavkaPor__Proiz__778AC167">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Proiz__4F7CD00D" Association="Self.FK__StavkaRac__Proiz__4F7CD00D">
+            <End Role="Proizvod" EntitySet="Proizvod" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Sifra__4E88ABD4" Association="Self.FK__StavkaRac__Sifra__4E88ABD4">
+            <End Role="Racun" EntitySet="Racun" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sto__SektorId__6FE99F9F" Association="Self.FK__Sto__SektorId__6FE99F9F">
+            <End Role="Sektor" EntitySet="Sektor" />
+            <End Role="Sto" EntitySet="Sto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestoranModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Porudzbenicas" Relationship="Self.FK__Porudzben__Dobav__74AE54BC" FromRole="Dobavljac" ToRole="Porudzbenica" />
+        </EntityType>
+        <EntityType Name="Gost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ImePrezime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Rezervacijas" Relationship="Self.FK__Rezervaci__GostI__3E52440B" FromRole="Gost" ToRole="Rezervacija" />
+        </EntityType>
+        <EntityType Name="Jelo">
+          <Key>
+            <PropertyRef Name="ProizvodId" />
+          </Key>
+          <Property Name="ProizvodId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__Jelo__ProizvodId__45F365D3" FromRole="Jelo" ToRole="Proizvod" />
+          <NavigationProperty Name="Namirnicas" Relationship="Self.JeloNamirnica" FromRole="Jelo" ToRole="Namirnica" />
+        </EntityType>
+        <EntityType Name="Namirnica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lager" Type="Int32" />
+          <NavigationProperty Name="Jeloes" Relationship="Self.JeloNamirnica" FromRole="Namirnica" ToRole="Jelo" />
+        </EntityType>
+        <EntityType Name="Pice">
+          <Key>
+            <PropertyRef Name="ProizvodId" />
+          </Key>
+          <Property Name="ProizvodId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__Pice__ProizvodId__4316F928" FromRole="Pice" ToRole="Proizvod" />
+        </EntityType>
+        <EntityType Name="Porudzbenica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DobavljacId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dobavljac" Relationship="Self.FK__Porudzben__Dobav__74AE54BC" FromRole="Porudzbenica" ToRole="Dobavljac" />
+          <NavigationProperty Name="StavkaPorudzbenices" Relationship="Self.FK__StavkaPor__Porud__787EE5A0" FromRole="Porudzbenica" ToRole="StavkaPorudzbenice" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lager" Type="Int32" Nullable="false" />
+          <Property Name="Cena" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Jelo" Relationship="Self.FK__Jelo__ProizvodId__45F365D3" FromRole="Proizvod" ToRole="Jelo" />
+          <NavigationProperty Name="Pice" Relationship="Self.FK__Pice__ProizvodId__4316F928" FromRole="Proizvod" ToRole="Pice" />
+          <NavigationProperty Name="StavkaPorudzbenices" Relationship="Self.FK__StavkaPor__Proiz__778AC167" FromRole="Proizvod" ToRole="StavkaPorudzbenice" />
+          <NavigationProperty Name="StavkaRacunas" Relationship="Self.FK__StavkaRac__Proiz__4F7CD00D" FromRole="Proizvod" ToRole="StavkaRacuna" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="SifraRacuna" />
+          </Key>
+          <Property Name="SifraRacuna" Type="Int32" Nullable="false" />
+          <Property Name="BrojStola" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sto" Relationship="Self.FK__Racun__BrojStola__5AEE82B9" FromRole="Racun" ToRole="Sto" />
+          <NavigationProperty Name="StavkaRacunas" Relationship="Self.FK__StavkaRac__Sifra__4E88ABD4" FromRole="Racun" ToRole="StavkaRacuna" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+            <PropertyRef Name="GostId" />
+            <PropertyRef Name="DatumVreme" />
+          </Key>
+          <Property Name="BrojStola" Type="Int32" Nullable="false" />
+          <Property Name="GostId" Type="Int32" Nullable="false" />
+          <Property Name="DatumVreme" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BrojRezervacije" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gost" Relationship="Self.FK__Rezervaci__GostI__3E52440B" FromRole="Rezervacija" ToRole="Gost" />
+          <NavigationProperty Name="Sto" Relationship="Self.FK__Rezervaci__BrojS__3D5E1FD2" FromRole="Rezervacija" ToRole="Sto" />
+        </EntityType>
+        <EntityType Name="Sektor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Stoes" Relationship="Self.FK__Sto__SektorId__6FE99F9F" FromRole="Sektor" ToRole="Sto" />
+        </EntityType>
+        <EntityType Name="StavkaPorudzbenice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProizvodId" Type="Int32" Nullable="false" />
+          <Property Name="PorudzbenicaId" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Porudzbenica" Relationship="Self.FK__StavkaPor__Porud__787EE5A0" FromRole="StavkaPorudzbenice" ToRole="Porudzbenica" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__StavkaPor__Proiz__778AC167" FromRole="StavkaPorudzbenice" ToRole="Proizvod" />
+        </EntityType>
+        <EntityType Name="StavkaRacuna">
+          <Key>
+            <PropertyRef Name="StavkaId" />
+          </Key>
+          <Property Name="SifraRacuna" Type="Int32" Nullable="false" />
+          <Property Name="ProizvodId" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <Property Name="StavkaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__StavkaRac__Proiz__4F7CD00D" FromRole="StavkaRacuna" ToRole="Proizvod" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK__StavkaRac__Sifra__4E88ABD4" FromRole="StavkaRacuna" ToRole="Racun" />
+        </EntityType>
+        <EntityType Name="Sto">
+          <Key>
+            <PropertyRef Name="BrojStola" />
+          </Key>
+          <Property Name="BrojStola" Type="Int32" Nullable="false" />
+          <Property Name="SektorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Racuns" Relationship="Self.FK__Racun__BrojStola__5AEE82B9" FromRole="Sto" ToRole="Racun" />
+          <NavigationProperty Name="Rezervacijas" Relationship="Self.FK__Rezervaci__BrojS__3D5E1FD2" FromRole="Sto" ToRole="Rezervacija" />
+          <NavigationProperty Name="Sektor" Relationship="Self.FK__Sto__SektorId__6FE99F9F" FromRole="Sto" ToRole="Sektor" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__Porudzben__Dobav__74AE54BC">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Porudzbenica">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__GostI__3E52440B">
+          <End Role="Gost" Type="Self.Gost" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="GostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Jelo__ProizvodId__45F365D3">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="Jelo" Type="Self.Jelo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jelo">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pice__ProizvodId__4316F928">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="Pice" Type="Self.Pice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pice">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Porud__787EE5A0">
+          <End Role="Porudzbenica" Type="Self.Porudzbenica" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Porudzbenica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="PorudzbenicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaPor__Proiz__778AC167">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaPorudzbenice" Type="Self.StavkaPorudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaPorudzbenice">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Proiz__4F7CD00D">
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="ProizvodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Racun__BrojStola__5AEE82B9">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StavkaRac__Sifra__4E88ABD4">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="StavkaRacuna" Type="Self.StavkaRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="SifraRacuna" />
+            </Principal>
+            <Dependent Role="StavkaRacuna">
+              <PropertyRef Name="SifraRacuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervaci__BrojS__3D5E1FD2">
+          <End Role="Sto" Type="Self.Sto" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sto">
+              <PropertyRef Name="BrojStola" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="BrojStola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sto__SektorId__6FE99F9F">
+          <End Role="Sektor" Type="Self.Sektor" Multiplicity="1" />
+          <End Role="Sto" Type="Self.Sto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sektor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sto">
+              <PropertyRef Name="SektorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JeloNamirnica">
+          <End Role="Jelo" Type="Self.Jelo" Multiplicity="*" />
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="RestoranContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dobavljacs" EntityType="Self.Dobavljac" />
+          <EntitySet Name="Gosts" EntityType="Self.Gost" />
+          <EntitySet Name="Jeloes" EntityType="Self.Jelo" />
+          <EntitySet Name="Namirnicas" EntityType="Self.Namirnica" />
+          <EntitySet Name="Pices" EntityType="Self.Pice" />
+          <EntitySet Name="Porudzbenicas" EntityType="Self.Porudzbenica" />
+          <EntitySet Name="Proizvods" EntityType="Self.Proizvod" />
+          <EntitySet Name="Racuns" EntityType="Self.Racun" />
+          <EntitySet Name="Rezervacijas" EntityType="Self.Rezervacija" />
+          <EntitySet Name="Sektors" EntityType="Self.Sektor" />
+          <EntitySet Name="StavkaPorudzbenices" EntityType="Self.StavkaPorudzbenice" />
+          <EntitySet Name="StavkaRacunas" EntityType="Self.StavkaRacuna" />
+          <EntitySet Name="Stoes" EntityType="Self.Sto" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK__Porudzben__Dobav__74AE54BC" Association="Self.FK__Porudzben__Dobav__74AE54BC">
+            <End Role="Dobavljac" EntitySet="Dobavljacs" />
+            <End Role="Porudzbenica" EntitySet="Porudzbenicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__GostI__3E52440B" Association="Self.FK__Rezervaci__GostI__3E52440B">
+            <End Role="Gost" EntitySet="Gosts" />
+            <End Role="Rezervacija" EntitySet="Rezervacijas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Jelo__ProizvodId__45F365D3" Association="Self.FK__Jelo__ProizvodId__45F365D3">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="Jelo" EntitySet="Jeloes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pice__ProizvodId__4316F928" Association="Self.FK__Pice__ProizvodId__4316F928">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="Pice" EntitySet="Pices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Porud__787EE5A0" Association="Self.FK__StavkaPor__Porud__787EE5A0">
+            <End Role="Porudzbenica" EntitySet="Porudzbenicas" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaPor__Proiz__778AC167" Association="Self.FK__StavkaPor__Proiz__778AC167">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="StavkaPorudzbenice" EntitySet="StavkaPorudzbenices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Proiz__4F7CD00D" Association="Self.FK__StavkaRac__Proiz__4F7CD00D">
+            <End Role="Proizvod" EntitySet="Proizvods" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacunas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Racun__BrojStola__5AEE82B9" Association="Self.FK__Racun__BrojStola__5AEE82B9">
+            <End Role="Sto" EntitySet="Stoes" />
+            <End Role="Racun" EntitySet="Racuns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StavkaRac__Sifra__4E88ABD4" Association="Self.FK__StavkaRac__Sifra__4E88ABD4">
+            <End Role="Racun" EntitySet="Racuns" />
+            <End Role="StavkaRacuna" EntitySet="StavkaRacunas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervaci__BrojS__3D5E1FD2" Association="Self.FK__Rezervaci__BrojS__3D5E1FD2">
+            <End Role="Sto" EntitySet="Stoes" />
+            <End Role="Rezervacija" EntitySet="Rezervacijas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sto__SektorId__6FE99F9F" Association="Self.FK__Sto__SektorId__6FE99F9F">
+            <End Role="Sektor" EntitySet="Sektors" />
+            <End Role="Sto" EntitySet="Stoes" />
+          </AssociationSet>
+          <AssociationSet Name="JeloNamirnica" Association="Self.JeloNamirnica">
+            <End Role="Jelo" EntitySet="Jeloes" />
+            <End Role="Namirnica" EntitySet="Namirnicas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestoranModelStoreContainer" CdmEntityContainer="RestoranContext">
+          <EntitySetMapping Name="Dobavljacs">
+            <EntityTypeMapping TypeName="RestoranModel.Dobavljac">
+              <MappingFragment StoreEntitySet="Dobavljac">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gosts">
+            <EntityTypeMapping TypeName="RestoranModel.Gost">
+              <MappingFragment StoreEntitySet="Gost">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ImePrezime" ColumnName="ImePrezime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jeloes">
+            <EntityTypeMapping TypeName="RestoranModel.Jelo">
+              <MappingFragment StoreEntitySet="Jelo">
+                <ScalarProperty Name="ProizvodId" ColumnName="ProizvodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Namirnicas">
+            <EntityTypeMapping TypeName="RestoranModel.Namirnica">
+              <MappingFragment StoreEntitySet="Namirnica">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Lager" ColumnName="Lager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pices">
+            <EntityTypeMapping TypeName="RestoranModel.Pice">
+              <MappingFragment StoreEntitySet="Pice">
+                <ScalarProperty Name="ProizvodId" ColumnName="ProizvodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Porudzbenicas">
+            <EntityTypeMapping TypeName="RestoranModel.Porudzbenica">
+              <MappingFragment StoreEntitySet="Porudzbenica">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DobavljacId" ColumnName="DobavljacId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvods">
+            <EntityTypeMapping TypeName="RestoranModel.Proizvod">
+              <MappingFragment StoreEntitySet="Proizvod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Lager" ColumnName="Lager" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Racuns">
+            <EntityTypeMapping TypeName="RestoranModel.Racun">
+              <MappingFragment StoreEntitySet="Racun">
+                <ScalarProperty Name="SifraRacuna" ColumnName="SifraRacuna" />
+                <ScalarProperty Name="BrojStola" ColumnName="BrojStola" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervacijas">
+            <EntityTypeMapping TypeName="RestoranModel.Rezervacija">
+              <MappingFragment StoreEntitySet="Rezervacija">
+                <ScalarProperty Name="BrojStola" ColumnName="BrojStola" />
+                <ScalarProperty Name="GostId" ColumnName="GostId" />
+                <ScalarProperty Name="DatumVreme" ColumnName="DatumVreme" />
+                <ScalarProperty Name="BrojRezervacije" ColumnName="BrojRezervacije" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sektors">
+            <EntityTypeMapping TypeName="RestoranModel.Sektor">
+              <MappingFragment StoreEntitySet="Sektor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaPorudzbenices">
+            <EntityTypeMapping TypeName="RestoranModel.StavkaPorudzbenice">
+              <MappingFragment StoreEntitySet="StavkaPorudzbenice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProizvodId" ColumnName="ProizvodId" />
+                <ScalarProperty Name="PorudzbenicaId" ColumnName="PorudzbenicaId" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaRacunas">
+            <EntityTypeMapping TypeName="RestoranModel.StavkaRacuna">
+              <MappingFragment StoreEntitySet="StavkaRacuna">
+                <ScalarProperty Name="SifraRacuna" ColumnName="SifraRacuna" />
+                <ScalarProperty Name="ProizvodId" ColumnName="ProizvodId" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+                <ScalarProperty Name="StavkaId" ColumnName="StavkaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stoes">
+            <EntityTypeMapping TypeName="RestoranModel.Sto">
+              <MappingFragment StoreEntitySet="Sto">
+                <ScalarProperty Name="BrojStola" ColumnName="BrojStola" />
+                <ScalarProperty Name="SektorId" ColumnName="SektorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RestoranModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="JeloNamirnica" TypeName="RestoranModel.JeloNamirnica" StoreEntitySet="JeloNamirnica">
+            <EndProperty Name="Jelo">
+              <ScalarProperty Name="ProizvodId" ColumnName="JeloId" />
+            </EndProperty>
+            <EndProperty Name="Namirnica">
+              <ScalarProperty Name="Id" ColumnName="NamirnicaId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

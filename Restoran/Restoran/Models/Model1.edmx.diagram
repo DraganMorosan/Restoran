@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="320586eae73646d48880148d2ce7a317" Name="Diagram1">
+        <EntityTypeShape EntityType="RestoranModel.Dobavljac" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Gost" Width="1.5" PointX="1.5" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Jelo" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Namirnica" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Pice" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Porudzbenica" Width="1.5" PointX="3.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Proizvod" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Racun" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Rezervacija" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Sektor" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.StavkaPorudzbenice" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.StavkaRacuna" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.Sto" Width="1.5" PointX="1.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestoranModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="RestoranModel.FK__Porudzben__Dobav__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__Rezervaci__GostI__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__Jelo__ProizvodId__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__Pice__ProizvodId__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__StavkaPor__Porud__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__StavkaPor__Proiz__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__StavkaRac__Proiz__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__Racun__BrojStola__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__StavkaRac__Sifra__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__Rezervaci__BrojS__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.FK__Sto__SektorId__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="RestoranModel.JeloNamirnica" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

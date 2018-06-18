@@ -1,0 +1,50 @@
+﻿@model Restoran.Models.Rezervacija
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rezervacija</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BrojStola)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojStola)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GostId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GostId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumVreme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumVreme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrojRezervacije)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojRezervacije)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
